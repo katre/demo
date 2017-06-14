@@ -1,5 +1,4 @@
 test_toolchain_type = platform_common.toolchain_type()
-print('type: ' + str(test_toolchain_type))
 
 def _impl(ctx):
     toolchain = test_toolchain_type(
