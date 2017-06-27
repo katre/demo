@@ -1,28 +1,41 @@
-load(':test_toolchain.bzl', 'test_toolchain')
+load(':demo_toolchain.bzl', 'demo_toolchain')
 
-filegroup(name = 'dep_rule')
+toolchain_type(name = 'demo_toolchain')
 
-test_toolchain(
-    name = 'osx_toolchain',
+toolchain(
+    name = "linux_toolchain",
+    toolchain_type = ':demo_toolchain',
+    exec_compatible_with = [
+      '@bazel_tools//platforms:linux',
+    ],
+    target_compatible_with = [
+      '@bazel_tools//platforms:linux',
+    ],
+    toolchain = ":linux_toolchain")
+
+toolchain(
+    name = "osx_toolchain",
+    toolchain_type = ':demo_toolchain',
     exec_compatible_with = [
       '@bazel_tools//platforms:linux',
     ],
     target_compatible_with = [
       '@bazel_tools//platforms:osx',
     ],
-    extra_label = ':dep_rule',
-    extra_str = 'foo',
+    toolchain = "//toolchain:osx_toolchain")
+
+filegroup(name = 'osx_dep')
+filegroup(name = 'linux_dep')
+
+demo_toolchain(
+    name = 'osx_toolchain',
+    extra_label = ':osx_dep',
+    extra_str = 'osx',
 )
 
-test_toolchain(
+demo_toolchain(
     name = 'linux_toolchain',
-    exec_compatible_with = [
-      '@bazel_tools//platforms:linux',
-    ],
-    target_compatible_with = [
-      '@bazel_tools//platforms:linux',
-    ],
-    extra_label = ':dep_rule',
-    extra_str = 'bar',
+    extra_label = ':linux_dep',
+    extra_str = 'linux',
 )
 
