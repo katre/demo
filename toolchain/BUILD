@@ -11,7 +11,7 @@ toolchain(
     target_compatible_with = [
       '@bazel_tools//platforms:linux',
     ],
-    toolchain = ":linux_toolchain")
+    toolchain = ":linux_demo_toolchain")
 
 toolchain(
     name = "osx_toolchain",
@@ -22,19 +22,19 @@ toolchain(
     target_compatible_with = [
       '@bazel_tools//platforms:osx',
     ],
-    toolchain = "//toolchain:osx_toolchain")
+    toolchain = "//toolchain:osx_demo_toolchain")
 
 filegroup(name = 'osx_dep')
 filegroup(name = 'linux_dep')
 
 demo_toolchain(
-    name = 'osx_toolchain',
+    name = 'osx_demo_toolchain',
     extra_label = ':osx_dep',
     extra_str = 'osx',
 )
 
 demo_toolchain(
-    name = 'linux_toolchain',
+    name = 'linux_demo_toolchain',
     extra_label = ':linux_dep',
     extra_str = 'linux',
 )
