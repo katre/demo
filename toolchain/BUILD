@@ -1,3 +1,4 @@
+package(default_visibility = ["//visibility:public"])
 load(':demo_toolchain.bzl', 'demo_toolchain')
 
 toolchain_type(name = 'demo_toolchain')
