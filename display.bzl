@@ -33,3 +33,15 @@ display_toolchain = aspect(
     attrs = {
     },
 )
+
+def _display_platform_impl(target, ctx):
+  provider = target[platform_common.PlatformInfo]
+  print(provider)
+  return []
+
+display_platform = aspect(
+    implementation = _display_platform_impl,
+    attr_aspects = [],
+    attrs = {
+    },
+)
