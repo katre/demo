@@ -1,3 +1,13 @@
+filegroup(
+    name = "star",
+    srcs = glob(["*"]))
+filegroup(
+    name = "starstar",
+    srcs = glob(["**"]))
+filegroup(
+    name = "srcs",
+    srcs = glob(["**"]) + ["//foo:srcs"])
+
 load(':platform.bzl', 'display_platform')
 
 exports_files(["display.bzl"])
@@ -7,8 +17,8 @@ display_platform(name = 'display')
 load('//toolchain:rule.bzl', 'demo')
 demo(name = 'toolchain_demo', message = 'hi!')
 
-filegroup(name = 'nested',
-          srcs = ['local_repo/foo.txt'])
+#filegroup(name = 'nested',
+#          srcs = ['local_repo/foo.txt'])
 #filegroup(name = 'nested_glob',
 #          srcs = glob(['local_repo/foo.txt']))
 #filegroup(name = 'invalid_fg',
